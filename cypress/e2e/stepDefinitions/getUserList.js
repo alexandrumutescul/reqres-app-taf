@@ -3,7 +3,7 @@ import { Given, Then } from "cypress-cucumber-preprocessor/steps";
 let totalPages = 0;
 let calculatedTotalPages = 0;
 let id;
-let listUserFirstName;
+let listUserLastName;
 
 Given(
   "I get user list with page= {string} and get data array length and total field value",
@@ -23,14 +23,14 @@ Then("I check total data field value", () => {
 });
 
 Given(
-  "I get user list with page= {string} and save first_name and id field information form data array with {string}",
+  "I get user list with page= {string} and save last_name and id field information form data array with {string}",
   (pageNumber, dataIndex) => {
     cy.request(`/api/users?page=${pageNumber}`).then((response) => {
       expect(response.status, "response.status").to.eq(200);
-      listUserFirstName = response.body.data[dataIndex]["first_name"];
+      listUserLastName = response.body.data[dataIndex]["last_name"];
       id = response.body.data[dataIndex].id;
 
-      cy.share({ listUserFirstName: listUserFirstName });
+      cy.share({ listUserLastName: listUserLastName });
       cy.share({ id: id });
     });
   }

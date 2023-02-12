@@ -4,10 +4,10 @@ import moment from "moment";
 let dateNow = new Date();
 let createUserResponse;
 let createUserName;
-let singleUserFirstName;
+let singleUserLastName;
 
 Given(
-  "I create user with name {string} and job {string}",
+  "I create user with last name {string} and job {string}",
   (userName, userJob) => {
     createUserName = userName;
 
@@ -41,8 +41,8 @@ Then(
       cy.request(`/api/users/${createUserResponse.body.id}`).then(
         (response) => {
           expect(response.status, "response.status").to.eq(200);
-          singleUserFirstName = response.body.data["first_name"];
-          expect(createUserName, "createUserName").to.eq(singleUserFirstName);
+          singleUserLastName = response.body.data["last_name"];
+          expect(createUserName, "createUserName").to.eq(singleUserLastName);
         }
       );
     });
