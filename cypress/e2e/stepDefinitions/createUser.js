@@ -29,20 +29,20 @@ Then(
   (responseDuration) => {
     let currentYear = moment(dateNow).format("YYYY");
     let responseYear = moment(createUserResponse.body.createdAt).format("YYYY");
-    expect(createUserResponse.status).to.eq(201);
-    expect(parseInt(createUserResponse.body.id)).to.be.a("number");
-    expect(currentYear).to.eq(responseYear);
+    expect(createUserResponse.status, "createUserResponse.status").to.eq(201);
+    expect(parseInt(createUserResponse.body.id), "parseInt(createUserResponse.body.id)").to.be.a("number");
+    expect(currentYear, "currentYear").to.eq(responseYear);
 
     // TODO: highly flaky as most of the response time is above 100 ms
-    expect(createUserResponse.duration).to.below(parseInt(responseDuration));
+    expect(createUserResponse.duration, "createUserResponse.duration").to.below(parseInt(responseDuration));
 
     // TODO: create bug, user is not created successfully, response status code404, resource not found
     cy.wrap(null).then(() => {
       cy.request(`/api/users/${createUserResponse.body.id}`).then(
         (response) => {
-          expect(response.status).to.eq(200);
+          expect(response.status, "response.status").to.eq(200);
           singleUserFirstName = response.body.data["first_name"];
-          expect(createUserName).to.eq(singleUserFirstName);
+          expect(createUserName, "createUserName").to.eq(singleUserFirstName);
         }
       );
     });

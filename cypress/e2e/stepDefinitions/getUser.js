@@ -10,9 +10,9 @@ Then(
         let id = shared.id;
         let listUserFirstName = shared.listUserFirstName;
         cy.request(`/api/users/${id}`).then((response) => {
-          expect(response.status).to.eq(200);
+          expect(response.status, "response.status").to.eq(200);
           singleUserFirstName = response.body.data["first_name"];
-          expect(listUserFirstName).to.eq(singleUserFirstName);
+          expect(listUserFirstName, "listUserFirstName").to.eq(singleUserFirstName);
         });
       });
     });
