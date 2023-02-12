@@ -1,0 +1,40 @@
+{
+  "name": "reqres",
+  "version": "1.0.0",
+  "description": "Automated software testing with Cypress",
+  "main": "index.js",
+  "scripts": {
+    "open": "npx cypress open",
+    "execute": "npx cypress run --headless --browser chrome --config video=true",
+    "report": "node scripts/cucumber-html-report.js"
+  },
+  "keywords": [
+    "testing",
+    "cypress",
+    "automation"
+  ],
+  "author": "Alexandru Mutescul",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.5.1",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@cypress/browserify-preprocessor": "^3.0.1",
+    "config": "^3.3.6",
+    "cucumber-html-reporter": "^5.4.0",
+    "cypress-cucumber-preprocessor": "^4.2.0",
+    "prettier": "^2.2.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "commonPath": "cypress/e2e/stepDefinitions/",
+    "stepDefinitions": "cypress/e2e",
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/reports/cucumber",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  }
+}
